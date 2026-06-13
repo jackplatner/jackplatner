@@ -83,33 +83,23 @@ body {
 
 .nav__link span {
     display: block;
-    transition: opacity 0.2s ease;
 }
 
 .nav__link::after {
-    content: attr(data-label);
-    font-family: var(--font-handwriting), cursive;
-    font-size: 1.1rem;
-    left: 50%;
-    line-height: 1;
-    opacity: 0;
-    pointer-events: none;
+    background-color: currentColor;
+    bottom: -0.15rem;
+    content: "";
+    height: 1px;
+    left: 0;
     position: absolute;
-    text-align: center;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.2s ease;
-    white-space: nowrap;
-    width: max-content;
-    max-width: 10rem;
-}
-
-.nav__link:hover span {
-    opacity: 0;
+    right: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
 }
 
 .nav__link:hover::after {
-    opacity: 1;
+    transform: scaleX(1);
 }
 
 .card-nav {
@@ -162,19 +152,6 @@ body {
     letter-spacing: -0.02em;
     text-align: center;
     white-space: nowrap;
-}
-
-.card__title-handwritten {
-    font-family: var(--font-handwriting), cursive;
-    font-size: 2.5rem;
-    left: 50%;
-    letter-spacing: 0.01em;
-    line-height: 1.1;
-    max-width: 12rem;
-    position: absolute;
-    text-align: center;
-    top: calc(100% + 0.6rem);
-    transform: translateX(-50%);
 }
 
 .card__image-link {
@@ -264,16 +241,6 @@ body {
         grid-column: 6 / span 6;
         grid-row: 1;
         height: max-content;
-    }
-
-    .card__title-handwritten {
-        display: block;
-        left: auto;
-        margin-top: 0.4rem;
-        position: static;
-        text-align: center;
-        top: auto;
-        transform: none;
     }
 
     .card__image-link {

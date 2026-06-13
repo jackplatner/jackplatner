@@ -72,7 +72,6 @@ export default function CardStrip({ projects }: { projects: Project[] }) {
               <div className="card__title-container">
                 <Link href={project.href} className="card__title-wrapper">
                   <h2 className="card__title-typed">{project.title}</h2>
-                  <span className="card__title-handwritten">{project.title}</span>
                 </Link>
               </div>
 

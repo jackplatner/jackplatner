@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const links = [
-  { label: "Portraits and Fashion", href: "/stills" },
-  { label: "Ceramic Cameras", href: "/stills/unbound14" },
-  { label: "Functional Ceramics", href: "#" },
-  { label: "About", href: "#" },
+  { label: "Projects", href: "/stills" },
+  { label: "Residencies", href: "#" },
+  { label: "Exhibitions", href: "#" },
+  { label: "Ceramics", href: "#" },
   { label: "Contact", href: "#" },
 ];
 
@@ -15,7 +15,7 @@ export default function Nav() {
       <ul className="nav__links">
         {links.map(({ label, href }) => (
           <li key={label}>
-            <Link href={href} className="nav__link" data-label={label}>
+            <Link href={href} className="nav__link">
               <span>{label}</span>
             </Link>
           </li>
