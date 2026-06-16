@@ -2,9 +2,21 @@ import { client, hasSanity } from "./client";
 import {
   fallbackCollections,
   fallbackContact,
+  fallbackHomepage,
   fallbackSettings,
 } from "./fallback";
 import type { Project } from "../../data/types";
+
+export const categoryBasePath: Record<string, string> = {
+  projects: "/stills",
+  residencies: "/residencies",
+  exhibitions: "/exhibitions",
+  ceramics: "/ceramics",
+};
+
+export interface HomeProject extends Project {
+  category: string;
+}
 
 const imageProjection = `images[]{
   "src": asset->url,
@@ -23,6 +35,19 @@ export async function getCollection(category: string): Promise<Project[]> {
       ${imageProjection}
     }`,
     { category },
+  );
+}
+
+export async function getHomepageProjects(): Promise<HomeProject[]> {
+  if (!hasSanity) return fallbackHomepage;
+  return client.fetch(
+    `*[_type == "project" && showOnHomepage == true] | order(orderRank) {
+      "slug": slug.current,
+      title,
+      description,
+      category,
+      ${imageProjection}
+    }`,
   );
 }
 

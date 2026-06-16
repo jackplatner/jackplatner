@@ -1,5 +1,5 @@
 import type { Project } from "../../data/types";
-import type { ContactContent, SiteSettings } from "./queries";
+import type { ContactContent, HomeProject, SiteSettings } from "./queries";
 
 const unbound14: Project = {
   slug: "unbound14",
@@ -43,6 +43,10 @@ export const fallbackCollections: Record<string, Project[]> = {
   exhibitions: [{ ...visionary, description: "Group Exhibition" }],
   ceramics: [unbound14],
 };
+
+export const fallbackHomepage: HomeProject[] = fallbackCollections.projects.map(
+  (item) => ({ ...item, category: "projects" }),
+);
 
 export const fallbackContact: ContactContent = {
   heading: "Contact",

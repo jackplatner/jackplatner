@@ -141,6 +141,7 @@ async function run() {
         slug: { _type: "slug", current: item.slug },
         category,
         description: item.description,
+        showOnHomepage: category === "projects",
         images,
         orderRank: String(i).padStart(6, "0"),
       };

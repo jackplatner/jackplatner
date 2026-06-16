@@ -40,6 +40,12 @@ export const project = defineType({
       type: "string",
     }),
     defineField({
+      name: "showOnHomepage",
+      title: "Show on homepage",
+      type: "boolean",
+      initialValue: false,
+    }),
+    defineField({
       name: "images",
       title: "Images",
       type: "array",

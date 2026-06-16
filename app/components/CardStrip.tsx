@@ -18,7 +18,7 @@ const MOBILE = "(max-width: 48rem)";
 
 export default function CardStrip({ projects }: { projects: Project[] }) {
   const n = projects.length;
-  const cloned = [projects[n - 1], ...projects, projects[0]];
+  const cloned = n > 0 ? [projects[n - 1], ...projects, projects[0]] : [];
 
   const [index, setIndex] = useState(1);
   const [animated, setAnimated] = useState(true);
