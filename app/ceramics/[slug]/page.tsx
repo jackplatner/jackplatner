@@ -1,8 +1,9 @@
 import ProjectDetail from "../../components/ProjectDetail";
-import { ceramics } from "../../data/ceramics";
+import { getCollection, getCollectionSlugs } from "../../lib/sanity/queries";
 
-export function generateStaticParams() {
-  return ceramics.map((s) => ({ slug: s.slug }));
+export async function generateStaticParams() {
+  const slugs = await getCollectionSlugs("ceramics");
+  return slugs.map((slug) => ({ slug }));
 }
 
 export default async function CeramicPage({
@@ -11,9 +12,10 @@ export default async function CeramicPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const items = await getCollection("ceramics");
   return (
     <ProjectDetail
-      items={ceramics}
+      items={items}
       basePath="/ceramics"
       backLabel="Ceramics"
       slug={slug}

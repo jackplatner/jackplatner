@@ -1,6 +1,7 @@
 import CollectionGrid from "../components/CollectionGrid";
-import { residencies } from "../data/residencies";
+import { getCollection } from "../lib/sanity/queries";
 
-export default function ResidenciesPage() {
-  return <CollectionGrid items={residencies} basePath="/residencies" />;
+export default async function ResidenciesPage() {
+  const items = await getCollection("residencies");
+  return <CollectionGrid items={items} basePath="/residencies" />;
 }

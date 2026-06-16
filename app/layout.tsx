@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Mono } from "next/font/google";
 import Nav from "./components/Nav";
+import { getSiteSettings } from "./lib/sanity/queries";
 import "./globals.css";
 
 const spaceMono = Space_Mono({
@@ -9,10 +10,13 @@ const spaceMono = Space_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Jack Platner",
-  description: "Photographer",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings();
+  return {
+    title: settings?.seoTitle || settings?.name || "Jack Platner",
+    description: settings?.seoDescription || "Photographer",
+  };
+}
 
 export default function RootLayout({
   children,

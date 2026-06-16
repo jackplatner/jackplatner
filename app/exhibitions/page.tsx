@@ -1,6 +1,7 @@
 import CollectionGrid from "../components/CollectionGrid";
-import { exhibitions } from "../data/exhibitions";
+import { getCollection } from "../lib/sanity/queries";
 
-export default function ExhibitionsPage() {
-  return <CollectionGrid items={exhibitions} basePath="/exhibitions" />;
+export default async function ExhibitionsPage() {
+  const items = await getCollection("exhibitions");
+  return <CollectionGrid items={items} basePath="/exhibitions" />;
 }

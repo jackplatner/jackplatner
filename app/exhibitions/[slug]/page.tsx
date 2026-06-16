@@ -1,8 +1,9 @@
 import ProjectDetail from "../../components/ProjectDetail";
-import { exhibitions } from "../../data/exhibitions";
+import { getCollection, getCollectionSlugs } from "../../lib/sanity/queries";
 
-export function generateStaticParams() {
-  return exhibitions.map((s) => ({ slug: s.slug }));
+export async function generateStaticParams() {
+  const slugs = await getCollectionSlugs("exhibitions");
+  return slugs.map((slug) => ({ slug }));
 }
 
 export default async function ExhibitionPage({
@@ -11,9 +12,10 @@ export default async function ExhibitionPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const items = await getCollection("exhibitions");
   return (
     <ProjectDetail
-      items={exhibitions}
+      items={items}
       basePath="/exhibitions"
       backLabel="Exhibitions"
       slug={slug}

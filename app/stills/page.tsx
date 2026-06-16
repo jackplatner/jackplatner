@@ -1,6 +1,7 @@
 import CollectionGrid from "../components/CollectionGrid";
-import { stills } from "../data/stills";
+import { getCollection } from "../lib/sanity/queries";
 
-export default function StillsPage() {
-  return <CollectionGrid items={stills} basePath="/stills" />;
+export default async function StillsPage() {
+  const items = await getCollection("projects");
+  return <CollectionGrid items={items} basePath="/stills" />;
 }

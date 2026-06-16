@@ -1,8 +1,9 @@
 import ProjectDetail from "../../components/ProjectDetail";
-import { stills } from "../../data/stills";
+import { getCollection, getCollectionSlugs } from "../../lib/sanity/queries";
 
-export function generateStaticParams() {
-  return stills.map((s) => ({ slug: s.slug }));
+export async function generateStaticParams() {
+  const slugs = await getCollectionSlugs("projects");
+  return slugs.map((slug) => ({ slug }));
 }
 
 export default async function StillPage({
@@ -11,9 +12,10 @@ export default async function StillPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const items = await getCollection("projects");
   return (
     <ProjectDetail
-      items={stills}
+      items={items}
       basePath="/stills"
       backLabel="Projects"
       slug={slug}

@@ -1,8 +1,9 @@
 import ProjectDetail from "../../components/ProjectDetail";
-import { residencies } from "../../data/residencies";
+import { getCollection, getCollectionSlugs } from "../../lib/sanity/queries";
 
-export function generateStaticParams() {
-  return residencies.map((s) => ({ slug: s.slug }));
+export async function generateStaticParams() {
+  const slugs = await getCollectionSlugs("residencies");
+  return slugs.map((slug) => ({ slug }));
 }
 
 export default async function ResidencyPage({
@@ -11,9 +12,10 @@ export default async function ResidencyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const items = await getCollection("residencies");
   return (
     <ProjectDetail
-      items={residencies}
+      items={items}
       basePath="/residencies"
       backLabel="Residencies"
       slug={slug}
