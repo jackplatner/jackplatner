@@ -1,11 +1,11 @@
 import ProjectDetail from "../../components/ProjectDetail";
-import { stills } from "../../data/stills";
+import { exhibitions } from "../../data/exhibitions";
 
 export function generateStaticParams() {
-  return stills.map((s) => ({ slug: s.slug }));
+  return exhibitions.map((s) => ({ slug: s.slug }));
 }
 
-export default async function StillPage({
+export default async function ExhibitionPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -13,9 +13,9 @@ export default async function StillPage({
   const { slug } = await params;
   return (
     <ProjectDetail
-      items={stills}
-      basePath="/stills"
-      backLabel="Projects"
+      items={exhibitions}
+      basePath="/exhibitions"
+      backLabel="Exhibitions"
       slug={slug}
     />
   );

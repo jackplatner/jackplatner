@@ -1,11 +1,6 @@
-export interface StillProject {
-  slug: string;
-  title: string;
-  description: string;
-  images: { src: string; width: number; height: number }[];
-}
+import type { Project } from "./types";
 
-export const stills: StillProject[] = [
+export const stills: Project[] = [
   {
     slug: "unbound14",
     title: "Unbound 14",

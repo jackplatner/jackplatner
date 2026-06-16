@@ -2,10 +2,10 @@ import Link from "next/link";
 
 const links = [
   { label: "Projects", href: "/stills" },
-  { label: "Residencies", href: "#" },
-  { label: "Exhibitions", href: "#" },
-  { label: "Ceramics", href: "#" },
-  { label: "Contact", href: "#" },
+  { label: "Residencies", href: "/residencies" },
+  { label: "Exhibitions", href: "/exhibitions" },
+  { label: "Ceramics", href: "/ceramics" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Nav() {

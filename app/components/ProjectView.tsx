@@ -3,20 +3,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import { useMountEffect } from "../../hooks/useMountEffect";
-
-interface StillImage {
-  src: string;
-  width: number;
-  height: number;
-}
+import { useMountEffect } from "../hooks/useMountEffect";
+import type { ProjectImage } from "../data/types";
 
 export default function ProjectView({
   images,
+  basePath,
+  backLabel,
   prevSlug,
   nextSlug,
 }: {
-  images: StillImage[];
+  images: ProjectImage[];
+  basePath: string;
+  backLabel: string;
   prevSlug: string;
   nextSlug: string;
 }) {
@@ -94,10 +93,10 @@ export default function ProjectView({
       ))}
 
       <footer className="scatter__footer">
-        <Link href="/stills" className="scatter__back">← Stills</Link>
+        <Link href={basePath} className="scatter__back">← {backLabel}</Link>
         <div className="scatter__project-nav">
-          <Link href={`/stills/${prevSlug}`}>Prev</Link>
-          <Link href={`/stills/${nextSlug}`}>Next</Link>
+          <Link href={`${basePath}/${prevSlug}`}>Prev</Link>
+          <Link href={`${basePath}/${nextSlug}`}>Next</Link>
         </div>
       </footer>
     </>
