@@ -12,8 +12,7 @@
     "start": "next start",
     "lint": "eslint",
     "studio": "sanity dev",
-    "studio:deploy": "sanity deploy",
-    "seed": "node --env-file=.env.local scripts/seed.mjs"
+    "studio:deploy": "sanity deploy"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",
@@ -33,6 +32,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.5",
     "sanity": "^6.0.0",
+    "sanity-plugin-media": "^4.3.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

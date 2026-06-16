@@ -9,7 +9,7 @@ export default async function Home() {
     image: s.images[0].src,
     width: s.images[0].width,
     height: s.images[0].height,
-    href: `${categoryBasePath[s.category] ?? "/stills"}/${s.slug}`,
+    href: `${categoryBasePath[s.category] ?? "/projects"}/${s.slug}`,
   }));
   return <CardStrip projects={projects} />;
 }

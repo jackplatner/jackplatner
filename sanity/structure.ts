@@ -1,12 +1,6 @@
 import type { StructureResolver } from "sanity/structure";
 import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
-
-const sections = [
-  { id: "projects", title: "Projects" },
-  { id: "residencies", title: "Residencies" },
-  { id: "exhibitions", title: "Exhibitions" },
-  { id: "ceramics", title: "Ceramics" },
-];
+import { sections } from "./sections";
 
 export const structure: StructureResolver = (S, context) =>
   S.list()
@@ -30,6 +24,16 @@ export const structure: StructureResolver = (S, context) =>
           title: section.title,
           filter: "category == $category",
           params: { category: section.id },
+          createIntent: false,
+          menuItems: [
+            S.menuItem()
+              .title(`New ${section.singular}`)
+              .intent({
+                type: "create",
+                params: { type: "project", template: `project-${section.id}` },
+              })
+              .serialize(),
+          ],
           S,
           context,
         }),

@@ -6,7 +6,7 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-export default async function StillPage({
+export default async function ProjectPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -16,7 +16,7 @@ export default async function StillPage({
   return (
     <ProjectDetail
       items={items}
-      basePath="/stills"
+      basePath="/projects"
       backLabel="Projects"
       slug={slug}
     />

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getSiteSettings } from "../lib/sanity/queries";
 
 const links = [
-  { label: "Projects", href: "/stills" },
+  { label: "Projects", href: "/projects" },
   { label: "Residencies", href: "/residencies" },
   { label: "Exhibitions", href: "/exhibitions" },
   { label: "Ceramics", href: "/ceramics" },

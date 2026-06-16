@@ -1,14 +1,8 @@
 import { client, hasSanity } from "./client";
-import {
-  fallbackCollections,
-  fallbackContact,
-  fallbackHomepage,
-  fallbackSettings,
-} from "./fallback";
 import type { Project } from "../../data/types";
 
 export const categoryBasePath: Record<string, string> = {
-  projects: "/stills",
+  projects: "/projects",
   residencies: "/residencies",
   exhibitions: "/exhibitions",
   ceramics: "/ceramics",
@@ -26,7 +20,7 @@ const imageProjection = `images[]{
 }`;
 
 export async function getCollection(category: string): Promise<Project[]> {
-  if (!hasSanity) return fallbackCollections[category] ?? [];
+  if (!hasSanity) return [];
   return client.fetch(
     `*[_type == "project" && category == $category] | order(orderRank) {
       "slug": slug.current,
@@ -39,7 +33,7 @@ export async function getCollection(category: string): Promise<Project[]> {
 }
 
 export async function getHomepageProjects(): Promise<HomeProject[]> {
-  if (!hasSanity) return fallbackHomepage;
+  if (!hasSanity) return [];
   return client.fetch(
     `*[_type == "project" && showOnHomepage == true] | order(orderRank) {
       "slug": slug.current,
@@ -52,8 +46,7 @@ export async function getHomepageProjects(): Promise<HomeProject[]> {
 }
 
 export async function getCollectionSlugs(category: string): Promise<string[]> {
-  if (!hasSanity)
-    return (fallbackCollections[category] ?? []).map((item) => item.slug);
+  if (!hasSanity) return [];
   return client.fetch(
     `*[_type == "project" && category == $category && defined(slug.current)].slug.current`,
     { category },
@@ -67,7 +60,7 @@ export interface ContactContent {
 }
 
 export async function getContact(): Promise<ContactContent | null> {
-  if (!hasSanity) return fallbackContact;
+  if (!hasSanity) return null;
   return client.fetch(
     `*[_type == "contactPage"][0]{ heading, intro, links[]{ label, url } }`,
   );
@@ -80,7 +73,7 @@ export interface SiteSettings {
 }
 
 export async function getSiteSettings(): Promise<SiteSettings | null> {
-  if (!hasSanity) return fallbackSettings;
+  if (!hasSanity) return null;
   return client.fetch(
     `*[_type == "siteSettings"][0]{ name, seoTitle, seoDescription }`,
   );
