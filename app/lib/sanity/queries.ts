@@ -1,15 +1,23 @@
 import { client, hasSanity } from "./client";
 import type { Project } from "../../data/types";
 
-export const categoryBasePath: Record<string, string> = {
-  projects: "/projects",
-  residencies: "/residencies",
-  exhibitions: "/exhibitions",
-  ceramics: "/ceramics",
-};
-
 export interface HomeProject extends Project {
   category: string;
+}
+
+export interface ProjectParam {
+  category: string;
+  slug: string;
+}
+
+export async function getAllProjectParams(): Promise<ProjectParam[]> {
+  if (!hasSanity) return [];
+  return client.fetch(
+    `*[_type == "project" && defined(slug.current) && defined(category)]{
+      "category": category,
+      "slug": slug.current
+    }`,
+  );
 }
 
 const imageProjection = `images[]{

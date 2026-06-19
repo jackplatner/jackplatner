@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { orderRankField } from "@sanity/orderable-document-list";
+import { BatchImageInput } from "../components/BatchImageInput";
 
 export const project = defineType({
   name: "project",
@@ -63,6 +64,7 @@ export const project = defineType({
         },
       ],
       validation: (rule) => rule.required().min(1),
+      components: { input: BatchImageInput },
     }),
     orderRankField({ type: "project" }),
   ],
