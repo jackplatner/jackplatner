@@ -7,7 +7,7 @@ import { useMountEffect } from "../hooks/useMountEffect";
 
 interface Project {
   title: string;
-  description: string;
+  subtitle: string;
   image: string;
   href: string;
   width: number;
@@ -90,9 +90,9 @@ export default function CardStrip({ projects }: { projects: Project[] }) {
                 </Link>
               </div>
 
-              <div className="card__description-container">
-                <Link href={project.href} className="card__description-link">
-                  {project.description}
+              <div className="card__subtitle-container">
+                <Link href={project.href} className="card__subtitle-link">
+                  {project.subtitle}
                 </Link>
               </div>
 

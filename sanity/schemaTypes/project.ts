@@ -36,9 +36,17 @@ export const project = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "subtitle",
+      title: "Subtitle",
+      description: "Short caption shown under the homepage card, e.g. \"Award\" or \"Johnson, VT\".",
+      type: "string",
+    }),
+    defineField({
       name: "description",
       title: "Description",
-      type: "string",
+      description: "Longer text about the project, shown behind the Info link on the project page.",
+      type: "text",
+      rows: 8,
     }),
     defineField({
       name: "showOnHomepage",

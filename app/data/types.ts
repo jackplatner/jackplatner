@@ -8,6 +8,7 @@ export interface ProjectImage {
 export interface Project {
   slug: string;
   title: string;
-  description: string;
+  subtitle: string;
+  description: string | null;
   images: ProjectImage[];
 }

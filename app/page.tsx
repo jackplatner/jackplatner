@@ -5,7 +5,7 @@ export default async function Home() {
   const items = await getHomepageProjects();
   const projects = items.map((s) => ({
     title: s.title,
-    description: s.description,
+    subtitle: s.subtitle,
     image: s.images[0].src,
     width: s.images[0].width,
     height: s.images[0].height,

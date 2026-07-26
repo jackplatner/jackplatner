@@ -24,6 +24,8 @@ export default function ProjectDetail({
     <main className="project-page">
       <ProjectView
         images={project.images}
+        title={project.title}
+        description={project.description}
         basePath={basePath}
         backLabel={backLabel}
         prevSlug={prev.slug}

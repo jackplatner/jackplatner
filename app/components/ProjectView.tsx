@@ -8,12 +8,16 @@ import type { ProjectImage } from "../data/types";
 
 export default function ProjectView({
   images,
+  title,
+  description,
   basePath,
   backLabel,
   prevSlug,
   nextSlug,
 }: {
   images: ProjectImage[];
+  title: string;
+  description: string | null;
   basePath: string;
   backLabel: string;
   prevSlug: string;
@@ -92,8 +96,24 @@ export default function ProjectView({
         </div>
       ))}
 
+      {description && (
+        <>
+          <span id="info-close" />
+          <div id="info" className="info">
+            <div className="info__panel">
+              <h2 className="info__title">{title}</h2>
+              <p className="info__body">{description}</p>
+            </div>
+            <div className="info__bar">
+              <a href="#info-close" className="info__btn">Close</a>
+            </div>
+          </div>
+        </>
+      )}
+
       <footer className="scatter__footer">
         <Link href={basePath} className="scatter__back">← {backLabel}</Link>
+        {description && <a href="#info" className="scatter__info">Info</a>}
         <div className="scatter__project-nav">
           <Link href={`${basePath}/${prevSlug}`}>Prev</Link>
           <Link href={`${basePath}/${nextSlug}`}>Next</Link>

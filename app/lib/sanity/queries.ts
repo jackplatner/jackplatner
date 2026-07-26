@@ -33,6 +33,7 @@ export async function getCollection(category: string): Promise<Project[]> {
     `*[_type == "project" && category == $category] | order(orderRank) {
       "slug": slug.current,
       title,
+      "subtitle": coalesce(subtitle, ""),
       description,
       ${imageProjection}
     }`,
@@ -46,6 +47,7 @@ export async function getHomepageProjects(): Promise<HomeProject[]> {
     `*[_type == "project" && showOnHomepage == true] | order(orderRank) {
       "slug": slug.current,
       title,
+      "subtitle": coalesce(subtitle, ""),
       description,
       category,
       ${imageProjection}
