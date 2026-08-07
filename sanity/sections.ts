@@ -3,4 +3,5 @@ export const sections = [
   { id: "residencies", title: "Residencies", singular: "Residency" },
   { id: "exhibitions", title: "Exhibitions", singular: "Exhibition" },
   { id: "ceramics", title: "Ceramics", singular: "Ceramic" },
+  { id: "photography", title: "Photography", singular: "Photograph" },
 ];

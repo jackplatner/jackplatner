@@ -1,9 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
-import { useMountEffect } from "../hooks/useMountEffect";
 import type { ProjectImage } from "../data/types";
 
 export default function ProjectView({
@@ -23,98 +19,40 @@ export default function ProjectView({
   prevSlug: string;
   nextSlug: string;
 }) {
-  const viewportRef = useRef<HTMLDivElement>(null);
-
-  useMountEffect(() => {
-    const viewport = viewportRef.current;
-    if (!viewport) return;
-
-    const h = () => viewport.scrollHeight / 3;
-    viewport.scrollTop = h();
-
-    const onScroll = () => {
-      if (window.matchMedia("(max-width: 48rem)").matches) return;
-      const oneSet = h();
-      if (viewport.scrollTop < oneSet) viewport.scrollTop += oneSet;
-      else if (viewport.scrollTop >= oneSet * 2) viewport.scrollTop -= oneSet;
-    };
-
-    viewport.addEventListener("scroll", onScroll, { passive: true });
-    return () => viewport.removeEventListener("scroll", onScroll);
-  });
-
-  const triple = [...images, ...images, ...images];
-  const n = images.length;
-
   return (
     <>
-      <div className="scatter-viewport" ref={viewportRef}>
-        <div className="scatter-track">
-          {triple.map((image, i) => (
-            <a
-              key={i}
-              href={`#photo-${i % n}`}
-              className={`scatter__item${i < n || i >= n * 2 ? " scatter__item--clone" : ""}`}
-              data-pos={(((i % n) % 4) + 1).toString()}
-            >
-              <Image
-                src={image.src}
-                alt=""
-                width={image.width}
-                height={image.height}
-                sizes="(max-width: 48rem) 80vw, 25vw"
-                style={{ width: "100%", height: "auto" }}
-              />
-            </a>
-          ))}
-        </div>
-      </div>
-
-      <span id="lightbox-close" />
-      {images.map((image, i) => (
-        <div key={i} id={`photo-${i}`} className="lightbox">
-          <div className="lightbox__image">
+      <div className="stack">
+        {images.map((image, i) => (
+          <section key={i} className="stack__slide">
             <Image
+              className="stack__image"
               src={image.src}
-              alt=""
+              alt={image.alt || ""}
               width={image.width}
               height={image.height}
-              sizes="max(620px, 37vw)"
-              style={{ width: "100%", height: "100%", objectFit: "contain" }}
+              sizes="100vw"
+              priority={i === 0}
             />
-          </div>
-          <div className="lightbox__bar">
-            <a href="#lightbox-close" className="lightbox__btn">Close</a>
-            <span className="lightbox__counter">
-              {String(i + 1).padStart(2, "0")}&thinsp;—&thinsp;{String(n).padStart(2, "0")}
-            </span>
-            <div className="lightbox__nav">
-              <a href={`#photo-${(i - 1 + n) % n}`} className="lightbox__btn">Prev</a>
-              <a href={`#photo-${(i + 1) % n}`} className="lightbox__btn">Next</a>
-            </div>
-          </div>
-        </div>
-      ))}
+          </section>
+        ))}
+      </div>
 
       {description && (
-        <>
-          <span id="info-close" />
-          <div id="info" className="info">
-            <div className="info__panel">
-              <h2 className="info__title">{title}</h2>
-              <p className="info__body">{description}</p>
-            </div>
-            <div className="info__bar">
-              <a href="#info-close" className="info__btn">Close</a>
-            </div>
+        <div id="info" className="info">
+          <div className="info__panel">
+            <h2 className="info__title">{title}</h2>
+            <p className="info__body">{description}</p>
           </div>
-        </>
+          <div className="info__bar">
+            <a href="#" className="info__btn">Close</a>
+          </div>
+        </div>
       )}
 
-      <footer className="scatter__footer">
-        <Link href={basePath} className="scatter__back">← {backLabel}</Link>
-        {description && <a href="#info" className="scatter__info">Info</a>}
-        <div className="scatter__project-nav">
+      <footer className="project__footer">
+        <Link href={basePath} className="project__back">← {backLabel}</Link>
+        {description && <a href="#info" className="project__info">Info</a>}
+        <div className="project__nav">
           <Link href={`${basePath}/${prevSlug}`}>Prev</Link>
           <Link href={`${basePath}/${nextSlug}`}>Next</Link>
         </div>

@@ -3,6 +3,7 @@ export const categories = [
   { id: "residencies", label: "Residencies" },
   { id: "exhibitions", label: "Exhibitions" },
   { id: "ceramics", label: "Ceramics" },
+  { id: "photography", label: "Photography" },
 ];
 
 export const categoryIds = categories.map((c) => c.id);

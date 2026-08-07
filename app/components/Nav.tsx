@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { getSiteSettings } from "../lib/sanity/queries";
+import { categories } from "../lib/sanity/categories";
 
 const links = [
-  { label: "Projects", href: "/projects" },
-  { label: "Residencies", href: "/residencies" },
-  { label: "Exhibitions", href: "/exhibitions" },
-  { label: "Ceramics", href: "/ceramics" },
+  ...categories.map(({ id, label }) => ({ label, href: `/${id}` })),
   { label: "Contact", href: "/contact" },
 ];
 

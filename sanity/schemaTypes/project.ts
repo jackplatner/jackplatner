@@ -30,6 +30,7 @@ export const project = defineType({
           { title: "Residencies", value: "residencies" },
           { title: "Exhibitions", value: "exhibitions" },
           { title: "Ceramics", value: "ceramics" },
+          { title: "Photography", value: "photography" },
         ],
         layout: "radio",
       },
