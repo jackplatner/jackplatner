@@ -27,7 +27,7 @@ export default function ProjectView({
             <Image
               className="stack__image"
               src={image.src}
-              alt={image.alt || ""}
+              alt={image.alt || `${title} — image ${i + 1} of ${images.length}`}
               width={image.width}
               height={image.height}
               sizes="100vw"

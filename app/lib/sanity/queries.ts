@@ -8,6 +8,7 @@ export interface HomeProject extends Project {
 export interface ProjectParam {
   category: string;
   slug: string;
+  updatedAt: string;
 }
 
 export async function getAllProjectParams(): Promise<ProjectParam[]> {
@@ -15,7 +16,8 @@ export async function getAllProjectParams(): Promise<ProjectParam[]> {
   return client.fetch(
     `*[_type == "project" && defined(slug.current) && defined(category)]{
       "category": category,
-      "slug": slug.current
+      "slug": slug.current,
+      "updatedAt": _updatedAt
     }`,
   );
 }
@@ -67,6 +69,16 @@ export interface ContactContent {
   heading: string | null;
   intro: string | null;
   links: { label: string; url: string }[];
+}
+
+export const fallbackContactLinks = [
+  { label: "Email", url: "mailto:hello@jackplatner.com" },
+  { label: "Instagram", url: "https://instagram.com/jackplatner" },
+];
+
+export async function getContactLinks(): Promise<ContactContent["links"]> {
+  const contact = await getContact();
+  return contact?.links?.length ? contact.links : fallbackContactLinks;
 }
 
 export async function getContact(): Promise<ContactContent | null> {

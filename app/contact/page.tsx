@@ -1,15 +1,22 @@
-import { getContact } from "../lib/sanity/queries";
+import type { Metadata } from "next";
+import { getContact, getContactLinks } from "../lib/sanity/queries";
+import { pageMetadata, truncate } from "../lib/seo/site";
 
-const fallbackLinks = [
-  { label: "Email", url: "mailto:hello@jackplatner.com" },
-  { label: "Instagram", url: "https://instagram.com/jackplatner" },
-];
+const defaultHeading = "Contact";
+const defaultIntro = "For prints, commissions, and inquiries.";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const contact = await getContact();
+  const title = contact?.heading || defaultHeading;
+  const description = truncate(contact?.intro || defaultIntro);
+  return pageMetadata({ title, description, path: "/contact" });
+}
 
 export default async function ContactPage() {
   const contact = await getContact();
-  const heading = contact?.heading || "Contact";
-  const intro = contact?.intro || "For prints, commissions, and inquiries.";
-  const links = contact?.links?.length ? contact.links : fallbackLinks;
+  const heading = contact?.heading || defaultHeading;
+  const intro = contact?.intro || defaultIntro;
+  const links = await getContactLinks();
 
   return (
     <main className="contact">

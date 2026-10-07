@@ -22,6 +22,7 @@ export default function ProjectDetail({
 
   return (
     <main className="project-page">
+      <h1 className="sr-only">{project.title}</h1>
       <ProjectView
         images={project.images}
         title={project.title}
